@@ -42,11 +42,8 @@ RUN chmod a+x /usr/bin/wkhtmltopdf.sh
 RUN ln -s /usr/bin/wkhtmltopdf.sh /usr/local/bin/wkhtmltopdf
 
 # Usuario padrao
-RUN useradd -m \
-    -G sudo \
-    # diminui a chance das permissoes ficarem zoadas
-    -u 1000 \ 
-    ubuntu
+# uid 1000 tem boa chance de coincidir com o uid de usuarios linux (srry macOSistas)
+RUN useradd -m -G sudo -u 1000 ubuntu
 USER ubuntu
 ENV HOME /home/ubuntu
 WORKDIR $HOME
