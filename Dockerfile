@@ -7,7 +7,7 @@ RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selectio
 
 # Instalando as dependencias do sistema
 RUN apt-get -qq update && \ 
-#apt-get -qq upgrade > /dev/null && \
+apt-get -qq upgrade > /dev/null && \
 apt-get -qq install \
 git \
 python2.7-dev \
