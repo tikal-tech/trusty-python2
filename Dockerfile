@@ -3,36 +3,44 @@ ENV PYTHONUNBUFFERED 1
 ENV PYTHONIOENCODING UTF-8
 
 # calando o debconf e o apt-get a instalacao da uma acelerada
-RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
-
-# Instalando as dependencias do sistema
-RUN apt-get -qq update && \ 
+RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections \
+apt-get -qq update && \ 
 apt-get -qq upgrade > /dev/null && \
 apt-get -qq install \
-git \
-python2.7-dev \
-libpq-dev \
-python-dev \
-xvfb \
-poppler-utils \
 build-essential \
+chromium-chromedriver \
+curl \
+git \
+git-core \
+libbz2-dev \
+libffi-dev \
+libgconf-2-4 \
+libncurses5-dev \
+libncursesw5-dev \
+libnss3-dev \
+libpq-dev \
+libqt5webkit5-dev \
+libreadline-dev \
+libsqlite3-dev \
+libssl-dev \
 libxml2-dev \
 libxslt1-dev \
 libxslt-dev \
-libxml2-dev \
-zlib1g-dev \
-libxml2-dev \
-libxslt-dev \
-tidy \
-libncurses5-dev \
-libffi-dev \
-libssl-dev \
-libnss3-dev \
-libgconf-2-4 \
-chromium-chromedriver \
+llvm \
+make \
+poppler-utils \
+python2.7-dev \
+python-dev \
+python-magic \
 qt5-default \
-libqt5webkit5-dev \
-wkhtmltopdf > /dev/null
+tidy \
+tk-dev \
+wget \
+wkhtmltopdf \
+xvfb \
+xz-utils \
+zlib1g-dev \
+> /dev/null
 
 # Configurando o wkhtmltopdf para gerar os pdfs
 RUN echo '#!/bin/bash\nxvfb-run -a --server-args="-screen 0, 1024x768x24" /usr/bin/wkhtmltopdf -q $*' > /usr/bin/wkhtmltopdf.sh
