@@ -3,7 +3,7 @@ ENV PYTHONUNBUFFERED 1
 ENV PYTHONIOENCODING UTF-8
 
 # calando o debconf e o apt-get a instalacao da uma acelerada
-RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections \
+RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections && \
 apt-get -qq update && \ 
 apt-get -qq upgrade > /dev/null && \
 apt-get -qq install \
