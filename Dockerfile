@@ -15,7 +15,7 @@ libpq-dev \
 python-dev \
 xvfb \
 poppler-utils \
-#build-essential \
+build-essential \
 libxml2-dev \
 libxslt1-dev \
 libxslt-dev \
@@ -41,7 +41,8 @@ RUN ln -s /usr/bin/wkhtmltopdf.sh /usr/local/bin/wkhtmltopdf
 
 # Usuario padrao
 # uid 1000 tem boa chance de coincidir com o uid de usuarios linux (srry macOSistas)
-RUN useradd -m -G sudo -u 1000 ubuntu
+# https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#user
+RUN useradd --no-log-init -m -G sudo -u 1000 -g 1000 ubuntu
 USER ubuntu
 ENV HOME /home/ubuntu
 WORKDIR $HOME
