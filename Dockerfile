@@ -7,16 +7,15 @@ RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selectio
 
 # Instalando as dependencias do sistema
 RUN apt-get -qq update && \
-apt-get -qq upgrade > /dev/null
-RUN apt-get -qq install \
+apt-get -qq upgrade > /dev/null && \
+apt-get -qq install \
 git \
-git-core \
 python2.7-dev \
 libpq-dev \
 python-dev \
 xvfb \
 poppler-utils \
-build-essential \
+#build-essential \
 libxml2-dev \
 libxslt1-dev \
 libxslt-dev \
@@ -25,7 +24,6 @@ zlib1g-dev \
 libxml2-dev \
 libxslt-dev \
 tidy \
-python-magic \
 libncurses5-dev \
 libffi-dev \
 libssl-dev \
