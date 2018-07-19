@@ -42,7 +42,7 @@ RUN ln -s /usr/bin/wkhtmltopdf.sh /usr/local/bin/wkhtmltopdf
 # Usuario padrao
 # uid 1000 tem boa chance de coincidir com o uid de usuarios linux (srry macOSistas)
 # https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#user
-RUN useradd --no-log-init -m -G sudo -u 1000 -g 1000 ubuntu
+RUN useradd --no-log-init -m -G sudo -u 1000 ubuntu
 USER ubuntu
 ENV HOME /home/ubuntu
 WORKDIR $HOME
