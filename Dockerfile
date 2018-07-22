@@ -1,6 +1,6 @@
 FROM ubuntu:14.04
 
-# calando o debconf e o apt-get a instalacao da uma acelerada
+# cale-se debconf! (a instalacao fica menos verbosa)
 RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections && \
 apt-get -qq update && \ 
 apt-get -qq upgrade > /dev/null && \
@@ -38,7 +38,8 @@ wkhtmltopdf \
 xvfb \
 xz-utils \
 zlib1g-dev \
-> /dev/null
+> /dev/null && \
+apt clean   # pra tentar deixar a imagem menor
 
 # Configurando o wkhtmltopdf para gerar os pdfs
 RUN echo '#!/bin/bash\nxvfb-run -a --server-args="-screen 0, 1024x768x24" /usr/bin/wkhtmltopdf -q $*' > /usr/bin/wkhtmltopdf.sh
