@@ -1,6 +1,4 @@
 FROM ubuntu:14.04
-ENV PYTHONUNBUFFERED 1
-ENV PYTHONIOENCODING UTF-8
 
 # calando o debconf e o apt-get a instalacao da uma acelerada
 RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections && \
@@ -31,7 +29,7 @@ make \
 poppler-utils \
 python2.7-dev \
 python-dev \
-python-magic \
+python-pip \
 qt5-default \
 tidy \
 tk-dev \
@@ -47,23 +45,24 @@ RUN echo '#!/bin/bash\nxvfb-run -a --server-args="-screen 0, 1024x768x24" /usr/b
 RUN chmod a+x /usr/bin/wkhtmltopdf.sh
 RUN ln -s /usr/bin/wkhtmltopdf.sh /usr/local/bin/wkhtmltopdf
 
-# Usuario padrao
-# https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#user
-RUN useradd --no-log-init -m -G sudo ubuntu && passwd -d ubuntu                                                                           
-
-USER ubuntu
-ENV HOME /home/ubuntu
-WORKDIR $HOME
-
-# instalar e configurar o python via pyenv
-RUN git clone git://github.com/yyuu/pyenv.git .pyenv
-ENV PYENV_ROOT $HOME/.pyenv
-ENV PATH $PYENV_ROOT/shims:$PYENV_ROOT/bin:$PATH
-
-RUN pyenv install 2.7.15
-RUN pyenv global 2.7.15
-RUN pyenv rehash
-
-# custom entrypoint. mapeia o usuario uid/guid do workdir e/ou folder alvo ao usuario ubuntu
-COPY docker_entrypoint.sh /usr/local/bin/docker_entrypoint
-ENTRYPOINT ["docker_entrypoint"]
+## # essa parte ainda ta experimental
+## # Usuario padrao
+## # https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#user
+## RUN useradd --no-log-init -m -G sudo ubuntu && passwd -d ubuntu                                                                           
+## 
+## USER ubuntu
+## ENV HOME /home/ubuntu
+## WORKDIR $HOME
+## 
+## # instalar e configurar o python via pyenv
+## RUN git clone git://github.com/yyuu/pyenv.git .pyenv
+## ENV PYENV_ROOT $HOME/.pyenv
+## ENV PATH $PYENV_ROOT/shims:$PYENV_ROOT/bin:$PATH
+## 
+## RUN pyenv install 2.7.15
+## RUN pyenv global 2.7.15
+## RUN pyenv rehash
+## 
+## # custom entrypoint. mapeia o usuario uid/guid do workdir e/ou folder alvo ao usuario ubuntu
+## COPY docker_entrypoint.sh /usr/local/bin/docker_entrypoint
+## ENTRYPOINT ["docker_entrypoint"]
