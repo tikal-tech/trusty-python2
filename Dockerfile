@@ -39,10 +39,11 @@ xvfb \
 xz-utils \
 zlib1g-dev \
 > /dev/null && \
-apt clean   # pra tentar deixar a imagem menor
+apt-get clean
 
 # Configurando o wkhtmltopdf para gerar os pdfs
-RUN echo '#!/bin/bash\nxvfb-run -a --server-args="-screen 0, 1024x768x24" /usr/bin/wkhtmltopdf -q $*' > /usr/bin/wkhtmltopdf.sh
+RUN echo '#!/bin/bash\nxvfb-run -a --server-args="-screen 0, 1024x768x24" /usr/bin/wkhtmltopdf -q $*' \
+> /usr/bin/wkhtmltopdf.sh
 RUN chmod a+x /usr/bin/wkhtmltopdf.sh
 RUN ln -s /usr/bin/wkhtmltopdf.sh /usr/local/bin/wkhtmltopdf
 
