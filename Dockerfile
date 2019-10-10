@@ -34,7 +34,7 @@ qt5-default \
 tidy \
 tk-dev \
 wget \
-wkhtmltopdf \
+wkhtmltopdf=0.12.5 \
 xvfb \
 xz-utils \
 zlib1g-dev \
